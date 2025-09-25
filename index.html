@@ -141,6 +141,7 @@
             font-weight: 600;
             color: var(--primary);
             font-size: 15px;
+            text-align: center;
         }
         
         tr:hover {
@@ -183,6 +184,11 @@
             font-size: 14px;
             padding: 15px;
             border-top: 1px solid #e0e0e0;
+        }
+        
+        .header-group {
+            background-color: #e8f4fc;
+            font-weight: 700;
         }
         
         @media (max-width: 768px) {
@@ -235,14 +241,21 @@
             <div class="section-title">Transaction Details</div>
             <table>
                 <thead>
-                    <tr>
+                    <tr class="header-group">
                         <th class="date-col">Date</th>
                         <th>Description</th>
-                        <th class="amount-col">Customer Collection</th>
+                        <th colspan="2"><b>Cash Inflow</b></th>
+                        <th colspan="2"><b>Cash Outflow</b></th>
+                        <th class="amount-col">Net Balance (₹)</th>
+                    </tr>
+                    <tr>
+                        <th class="date-col"></th>
+                        <th></th>
+                        <th class="amount-col">Receivables</th>
                         <th class="name-col">Customer Name</th>
                         <th class="amount-col">Vendor Payment</th>
                         <th class="name-col">Vendor Name</th>
-                        <th class="amount-col">Net Balance (₹)</th>
+                        <th class="amount-col"></th>
                     </tr>
                 </thead>
                 <tbody>
