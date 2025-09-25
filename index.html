@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGX - Cash Flow Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1a73e8;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .summary {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      flex: 1;
+      margin: 10px;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 22px;
+      color: #333;
+    }
+    .card p {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1a73e8;
+    }
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #1a73e8;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .net-balance {
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <header>SGX - Aggregate Cash Flow Dashboard</header>
+
+  <div class="summary">
+    <div class="card">
+      <h2>Total Receivables</h2>
+      <p>₹4,30,000</p>
+    </div>
+    <div class="card">
+      <h2>Total Liabilities</h2>
+      <p>₹3,00,000</p>
+    </div>
+    <div class="card">
+      <h2>Net Cash Flow</h2>
+      <p>₹1,30,000</p>
+    </div>
+    <div class="card">
+      <h2>Closing Balance</h2>
+      <p>₹6,30,000</p>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Receivables / Customer Collection</th>
+        <th>Customer Name</th>
+        <th>Vendor Payment</th>
+        <th>Vendor Name</th>
+        <th>Net Balance (₹)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01-09-2025</td>
+        <td>Opening Balance</td>
+        <td>5,00,000</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td class="net-balance">5,00,000</td>
+      </tr>
+      <tr>
+        <td>02-09-2025</td>
+        <td>Customer Collection</td>
+        <td>2,50,000</td>
+        <td>JS Mining</td>
+        <td>-</td>
+        <td>-</td>
+        <td class="net-balance">7,50,000</td>
+      </tr>
+      <tr>
+        <td>03-09-2025</td>
+        <td>Vendor Payment</td>
+        <td>-</td>
+        <td>-</td>
+        <td>1,00,000</td>
+        <td>Dwarka Enterprises</td>
+        <td class="net-balance">6,50,000</td>
+      </tr>
+      <tr>
+        <td>05-09-2025</td>
+        <td>Customer Collection</td>
+        <td>1,80,000</td>
+        <td>KEC International</td>
+        <td>-</td>
+        <td>-</td>
+        <td class="net-balance">8,30,000</td>
+      </tr>
+      <tr>
+        <td>07-09-2025</td>
+        <td>Vendor Payment</td>
+        <td>-</td>
+        <td>-</td>
+        <td>2,00,000</td>
+        <td>Transport</td>
+        <td class="net-balance">6,30,000</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
