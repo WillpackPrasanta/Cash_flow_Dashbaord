@@ -339,6 +339,118 @@
             font-size: 16px;
         }
         
+        /* New styles for improved table */
+        .cash-inflow-header {
+            background: linear-gradient(to right, #d4edda, #c3e6cb);
+            color: #155724;
+        }
+        
+        .cash-outflow-header {
+            background: linear-gradient(to right, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+        
+        .cash-inflow-cell {
+            background-color: #f8fff9;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .cash-outflow-cell {
+            background-color: #fff8f9;
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        .net-balance-cell {
+            background-color: #f0f8ff;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .date-display {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .modal-title {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        
+        .filter-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .filter-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
         @media (max-width: 1024px) {
             .summary-cards {
                 grid-template-columns: repeat(2, 1fr);
@@ -374,6 +486,12 @@
             .header-text h1 {
                 font-size: 28px;
             }
+            
+            .date-display {
+                position: static;
+                margin-top: 15px;
+                text-align: center;
+            }
         }
         
         /* Animation for numbers */
@@ -398,6 +516,9 @@
                 <div class="header-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
+            </div>
+            <div class="date-display">
+                <i class="fas fa-calendar-alt"></i> September 25, 2025
             </div>
         </header>
         
@@ -424,6 +545,7 @@
                 </div>
                 <div class="card-title">Net Cash Flow</div>
                 <div class="card-value positive">₹1,30,000</div>
+                <div class="card-description">Positive cash flow for the period</div>
             </div>
             <div class="summary-card">
                 <div class="card-icon">
@@ -431,6 +553,7 @@
                 </div>
                 <div class="card-title">Closing Balance</div>
                 <div class="card-value neutral">₹6,30,000</div>
+                <div class="card-description">Cash balance at period end</div>
             </div>
         </div>
         
@@ -447,8 +570,8 @@
                     <tr class="header-group">
                         <th class="date-col">Date</th>
                         <th>Description</th>
-                        <th colspan="2"><b>Cash Inflow</b></th>
-                        <th colspan="2"><b>Cash Outflow</b></th>
+                        <th colspan="2" class="cash-inflow-header">Cash Inflow</th>
+                        <th colspan="2" class="cash-outflow-header">Cash Outflow</th>
                         <th class="amount-col">Net Balance (₹)</th>
                     </tr>
                     <tr>
@@ -465,56 +588,56 @@
                     <tr>
                         <td>01-09-2025</td>
                         <td>Opening Balance</td>
-                        <td class="inflow amount-col">5,00,000</td>
+                        <td class="cash-inflow-cell amount-col">5,00,000</td>
                         <td></td>
                         <td class="amount-col"></td>
                         <td></td>
-                        <td class="amount-col">5,00,000</td>
+                        <td class="net-balance-cell amount-col">5,00,000</td>
                     </tr>
                     <tr>
                         <td>02-09-2025</td>
                         <td>Customer Collection</td>
-                        <td class="inflow amount-col">2,50,000</td>
+                        <td class="cash-inflow-cell amount-col">2,50,000</td>
                         <td>JS Mining</td>
                         <td class="amount-col"></td>
                         <td></td>
-                        <td class="amount-col">7,50,000</td>
+                        <td class="net-balance-cell amount-col">7,50,000</td>
                     </tr>
                     <tr>
                         <td>03-09-2025</td>
                         <td>Vendor Payment</td>
                         <td class="amount-col"></td>
                         <td></td>
-                        <td class="outflow amount-col">1,00,000</td>
+                        <td class="cash-outflow-cell amount-col">1,00,000</td>
                         <td>Dwarka Enterprises</td>
-                        <td class="amount-col">6,50,000</td>
+                        <td class="net-balance-cell amount-col">6,50,000</td>
                     </tr>
                     <tr>
                         <td>05-09-2025</td>
                         <td>Customer Collection</td>
-                        <td class="inflow amount-col">1,80,000</td>
+                        <td class="cash-inflow-cell amount-col">1,80,000</td>
                         <td>KEC International</td>
                         <td class="amount-col"></td>
                         <td></td>
-                        <td class="amount-col">8,30,000</td>
+                        <td class="net-balance-cell amount-col">8,30,000</td>
                     </tr>
                     <tr>
                         <td>07-09-2025</td>
                         <td>Vendor Payment</td>
                         <td class="amount-col"></td>
                         <td></td>
-                        <td class="outflow amount-col">2,00,000</td>
+                        <td class="cash-outflow-cell amount-col">2,00,000</td>
                         <td>Transport</td>
-                        <td class="amount-col">6,30,000</td>
+                        <td class="net-balance-cell amount-col">6,30,000</td>
                     </tr>
                     <tr class="summary-row">
                         <td><strong>Total</strong></td>
                         <td></td>
-                        <td class="inflow amount-col"><strong>4,30,000</strong></td>
+                        <td class="cash-inflow-cell amount-col"><strong>4,30,000</strong></td>
                         <td></td>
-                        <td class="outflow amount-col"><strong>3,00,000</strong></td>
+                        <td class="cash-outflow-cell amount-col"><strong>3,00,000</strong></td>
                         <td></td>
-                        <td class="amount-col"><strong>6,30,000</strong></td>
+                        <td class="net-balance-cell amount-col"><strong>6,30,000</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -522,6 +645,39 @@
         
         <div class="footer">
             SGX Financial Dashboard | Generated on September 25, 2025 | <i class="fas fa-sync-alt"></i> Updated in real-time
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div class="modal" id="filterModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Filter Transactions</div>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Date Range</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="date" class="filter-input" id="startDate">
+                    <input type="date" class="filter-input" id="endDate">
+                </div>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Transaction Type</label>
+                <select class="filter-input" id="transactionType">
+                    <option value="all">All Transactions</option>
+                    <option value="inflow">Cash Inflow</option>
+                    <option value="outflow">Cash Outflow</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Minimum Amount (₹)</label>
+                <input type="number" class="filter-input" id="minAmount" placeholder="Enter minimum amount">
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-outline" id="resetFilters">Reset</button>
+                <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+            </div>
         </div>
     </div>
 
@@ -550,13 +706,76 @@
                 }, 500);
             });
             
-            // Button actions
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                alert('Export functionality would be implemented here. Data would be downloaded as CSV or Excel file.');
+            // Modal functionality
+            const filterModal = document.getElementById('filterModal');
+            const filterBtn = document.getElementById('filterBtn');
+            const closeModal = document.getElementById('closeModal');
+            const applyFilters = document.getElementById('applyFilters');
+            const resetFilters = document.getElementById('resetFilters');
+            
+            filterBtn.addEventListener('click', function() {
+                filterModal.style.display = 'flex';
             });
             
-            document.getElementById('filterBtn').addEventListener('click', function() {
-                alert('Filter functionality would be implemented here. You could filter by date range, amount, or transaction type.');
+            closeModal.addEventListener('click', function() {
+                filterModal.style.display = 'none';
+            });
+            
+            applyFilters.addEventListener('click', function() {
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                const transactionType = document.getElementById('transactionType').value;
+                const minAmount = document.getElementById('minAmount').value;
+                
+                // In a real application, this would filter the table data
+                alert(`Filters applied:\nDate Range: ${startDate || 'Any'} to ${endDate || 'Any'}\nTransaction Type: ${transactionType}\nMinimum Amount: ${minAmount ? '₹' + minAmount : 'Any'}`);
+                
+                filterModal.style.display = 'none';
+            });
+            
+            resetFilters.addEventListener('click', function() {
+                document.getElementById('startDate').value = '';
+                document.getElementById('endDate').value = '';
+                document.getElementById('transactionType').value = 'all';
+                document.getElementById('minAmount').value = '';
+            });
+            
+            // Export functionality
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                // In a real application, this would generate a CSV or Excel file
+                const exportData = [
+                    ['Date', 'Description', 'Cash Inflow', 'Customer Name', 'Cash Outflow', 'Vendor Name', 'Net Balance'],
+                    ['01-09-2025', 'Opening Balance', '5,00,000', '', '', '', '5,00,000'],
+                    ['02-09-2025', 'Customer Collection', '2,50,000', 'JS Mining', '', '', '7,50,000'],
+                    ['03-09-2025', 'Vendor Payment', '', '', '1,00,000', 'Dwarka Enterprises', '6,50,000'],
+                    ['05-09-2025', 'Customer Collection', '1,80,000', 'KEC International', '', '', '8,30,000'],
+                    ['07-09-2025', 'Vendor Payment', '', '', '2,00,000', 'Transport', '6,30,000'],
+                    ['Total', '', '4,30,000', '', '3,00,000', '', '6,30,000']
+                ];
+                
+                // Create a CSV string
+                let csvContent = "data:text/csv;charset=utf-8,";
+                exportData.forEach(row => {
+                    csvContent += row.join(",") + "\r\n";
+                });
+                
+                // Create a download link
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "SGX_CashFlow_September2025.csv");
+                document.body.appendChild(link);
+                
+                // Trigger the download
+                link.click();
+                document.body.removeChild(link);
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === filterModal) {
+                    filterModal.style.display = 'none';
+                }
             });
         });
     </script>
