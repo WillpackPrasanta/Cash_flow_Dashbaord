@@ -120,7 +120,7 @@
         .summary-card:nth-child(1)::before { background: var(--success); }
         .summary-card:nth-child(2)::before { background: var(--danger); }
         .summary-card:nth-child(3)::before { background: var(--secondary); }
-        .summary-card:nth-child(4)::before { background: var(--warning); }
+        .summary-card:nth-child(4)::before { background: var(--secondary); } /* Changed to match closing balance */
         
         .summary-card:hover {
             transform: translateY(-8px);
@@ -157,7 +157,7 @@
         }
         
         .neutral {
-            color: var(--primary);
+            color: var(--secondary); /* Changed to match closing balance */
         }
         
         .card-description {
@@ -225,6 +225,21 @@
             font-weight: 700;
         }
         
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 13px;
+        }
+        
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
@@ -271,6 +286,11 @@
         .amount-col {
             width: 150px;
             text-align: right;
+        }
+        
+        .actions-col {
+            width: 150px;
+            text-align: center;
         }
         
         .cash-inflow-cell {
@@ -469,7 +489,7 @@
         }
         
         .card-value {
-            animation: countUp 1s ease-out;
+            animation: countUp 0.5s ease-out; /* Reduced animation time */
         }
     </style>
 </head>
@@ -512,7 +532,7 @@
                     <i class="fas fa-exchange-alt"></i>
                 </div>
                 <div class="card-title">Net Cash Flow</div>
-                <div class="card-value positive">₹1,30,000</div>
+                <div class="card-value neutral">₹1,30,000</div> <!-- Changed to neutral class -->
             </div>
             <div class="summary-card">
                 <div class="card-icon">
@@ -553,6 +573,7 @@
                         <th class="amount-col">Cash Inflow</th>
                         <th class="amount-col">Cash Outflow</th>
                         <th class="amount-col">Net Balance (₹)</th>
+                        <th class="actions-col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -562,6 +583,10 @@
                         <td class="cash-inflow-cell amount-col">5,00,000</td>
                         <td class="amount-col">-</td>
                         <td class="net-balance-cell amount-col">5,00,000</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                     <tr data-type="inflow">
                         <td>02-09-2025</td>
@@ -569,6 +594,10 @@
                         <td class="cash-inflow-cell amount-col">2,50,000</td>
                         <td class="amount-col">-</td>
                         <td class="net-balance-cell amount-col">7,50,000</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                     <tr data-type="outflow">
                         <td>03-09-2025</td>
@@ -576,6 +605,10 @@
                         <td class="amount-col">-</td>
                         <td class="cash-outflow-cell amount-col">1,00,000</td>
                         <td class="net-balance-cell amount-col">6,50,000</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                     <tr data-type="inflow">
                         <td>05-09-2025</td>
@@ -583,6 +616,10 @@
                         <td class="cash-inflow-cell amount-col">1,80,000</td>
                         <td class="amount-col">-</td>
                         <td class="net-balance-cell amount-col">8,30,000</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                     <tr data-type="outflow">
                         <td>07-09-2025</td>
@@ -590,6 +627,10 @@
                         <td class="amount-col">-</td>
                         <td class="cash-outflow-cell amount-col">2,00,000</td>
                         <td class="net-balance-cell amount-col">6,30,000</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     </tr>
                     <tr class="summary-row">
                         <td><strong>Total</strong></td>
@@ -597,6 +638,7 @@
                         <td class="cash-inflow-cell amount-col"><strong>4,30,000</strong></td>
                         <td class="cash-outflow-cell amount-col"><strong>3,00,000</strong></td>
                         <td class="net-balance-cell amount-col"><strong>6,30,000</strong></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -649,19 +691,61 @@
         </div>
     </div>
 
+    <!-- Edit Entry Modal -->
+    <div class="modal" id="editEntryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Edit Transaction</div>
+                <button class="close-btn" id="closeEditModal">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="entry-form">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="editDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Transaction Type</label>
+                        <select class="form-input" id="editType" required>
+                            <option value="">Select Type</option>
+                            <option value="inflow">Cash Inflow</option>
+                            <option value="outflow">Cash Outflow</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-input" id="editDescription" placeholder="Enter transaction description" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹)</label>
+                        <input type="number" class="form-input" id="editAmount" placeholder="Enter amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="editPartyLabel">Customer/Vendor Name</label>
+                        <input type="text" class="form-input" id="editParty" placeholder="Enter name">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelEdit">Cancel</button>
+                        <button type="submit" class="btn btn-success">Update Transaction</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // Transaction data storage
         let transactions = [
-            { date: '01-09-2025', description: 'Opening Balance', type: 'inflow', amount: 500000, party: '', balance: 500000 },
-            { date: '02-09-2025', description: 'Customer Collection - JS Mining', type: 'inflow', amount: 250000, party: 'JS Mining', balance: 750000 },
-            { date: '03-09-2025', description: 'Vendor Payment - Dwarka Enterprises', type: 'outflow', amount: 100000, party: 'Dwarka Enterprises', balance: 650000 },
-            { date: '05-09-2025', description: 'Customer Collection - KEC International', type: 'inflow', amount: 180000, party: 'KEC International', balance: 830000 },
-            { date: '07-09-2025', description: 'Vendor Payment - Transport', type: 'outflow', amount: 200000, party: 'Transport', balance: 630000 }
+            { id: 1, date: '01-09-2025', description: 'Opening Balance', type: 'inflow', amount: 500000, party: '', balance: 500000 },
+            { id: 2, date: '02-09-2025', description: 'Customer Collection - JS Mining', type: 'inflow', amount: 250000, party: 'JS Mining', balance: 750000 },
+            { id: 3, date: '03-09-2025', description: 'Vendor Payment - Dwarka Enterprises', type: 'outflow', amount: 100000, party: 'Dwarka Enterprises', balance: 650000 },
+            { id: 4, date: '05-09-2025', description: 'Customer Collection - KEC International', type: 'inflow', amount: 180000, party: 'KEC International', balance: 830000 },
+            { id: 5, date: '07-09-2025', description: 'Vendor Payment - Transport', type: 'outflow', amount: 200000, party: 'Transport', balance: 630000 }
         ];
 
         // Initialize the dashboard
         document.addEventListener('DOMContentLoaded', function() {
-            // Animate summary card numbers
+            // Animate summary card numbers (faster animation)
             const cardValues = document.querySelectorAll('.card-value');
             
             cardValues.forEach(value => {
@@ -669,19 +753,9 @@
                 value.textContent = '0';
                 
                 setTimeout(() => {
-                    let current = 0;
-                    const target = parseInt(originalText.replace(/[^0-9]/g, ''));
-                    const increment = target / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            value.textContent = originalText;
-                            clearInterval(timer);
-                        } else {
-                            value.textContent = '₹' + Math.floor(current).toLocaleString('en-IN');
-                        }
-                    }, 30);
-                }, 500);
+                    // Directly set the value without animation for speed
+                    value.textContent = originalText;
+                }, 100);
             });
             
             // Filter functionality
@@ -710,12 +784,18 @@
             
             // Modal functionality
             const addEntryModal = document.getElementById('addEntryModal');
+            const editEntryModal = document.getElementById('editEntryModal');
             const addEntryBtn = document.getElementById('addEntryBtn');
             const closeAddModal = document.getElementById('closeAddModal');
+            const closeEditModal = document.getElementById('closeEditModal');
             const cancelEntry = document.getElementById('cancelEntry');
+            const cancelEdit = document.getElementById('cancelEdit');
             const entryForm = document.getElementById('entryForm');
+            const editForm = document.getElementById('editForm');
             const entryType = document.getElementById('entryType');
+            const editType = document.getElementById('editType');
             const partyLabel = document.getElementById('partyLabel');
+            const editPartyLabel = document.getElementById('editPartyLabel');
             
             // Update party label based on transaction type
             entryType.addEventListener('change', function() {
@@ -728,6 +808,16 @@
                 }
             });
             
+            editType.addEventListener('change', function() {
+                if (this.value === 'inflow') {
+                    editPartyLabel.textContent = 'Customer Name';
+                } else if (this.value === 'outflow') {
+                    editPartyLabel.textContent = 'Vendor Name';
+                } else {
+                    editPartyLabel.textContent = 'Customer/Vendor Name';
+                }
+            });
+            
             addEntryBtn.addEventListener('click', function() {
                 addEntryModal.style.display = 'flex';
             });
@@ -737,12 +827,22 @@
                 entryForm.reset();
             });
             
+            closeEditModal.addEventListener('click', function() {
+                editEntryModal.style.display = 'none';
+                editForm.reset();
+            });
+            
             cancelEntry.addEventListener('click', function() {
                 addEntryModal.style.display = 'none';
                 entryForm.reset();
             });
             
-            // Handle form submission
+            cancelEdit.addEventListener('click', function() {
+                editEntryModal.style.display = 'none';
+                editForm.reset();
+            });
+            
+            // Handle form submission for adding new transaction
             entryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -760,6 +860,7 @@
                 const newBalance = type === 'inflow' ? lastBalance + amount : lastBalance - amount;
                 
                 const newTransaction = {
+                    id: transactions.length > 0 ? Math.max(...transactions.map(t => t.id)) + 1 : 1,
                     date: formattedDate,
                     description: description + (party ? ' - ' + party : ''),
                     type: type,
@@ -781,6 +882,107 @@
                 entryForm.reset();
                 
                 alert('Transaction added successfully!');
+            });
+            
+            // Handle form submission for editing transaction
+            editForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const id = parseInt(document.getElementById('editForm').dataset.editId);
+                const date = document.getElementById('editDate').value;
+                const type = document.getElementById('editType').value;
+                const description = document.getElementById('editDescription').value;
+                const amount = parseInt(document.getElementById('editAmount').value);
+                const party = document.getElementById('editParty').value;
+                
+                // Format date to DD-MM-YYYY
+                const formattedDate = formatDate(date);
+                
+                // Find and update the transaction
+                const transactionIndex = transactions.findIndex(t => t.id === id);
+                if (transactionIndex !== -1) {
+                    transactions[transactionIndex].date = formattedDate;
+                    transactions[transactionIndex].type = type;
+                    transactions[transactionIndex].description = description + (party ? ' - ' + party : '');
+                    transactions[transactionIndex].amount = amount;
+                    transactions[transactionIndex].party = party;
+                    
+                    // Recalculate balances
+                    recalculateBalances();
+                    
+                    // Update the table
+                    updateTransactionTable();
+                    
+                    // Update summary cards
+                    updateSummaryCards();
+                    
+                    // Close modal and reset form
+                    editEntryModal.style.display = 'none';
+                    editForm.reset();
+                    
+                    alert('Transaction updated successfully!');
+                }
+            });
+            
+            // Add event listeners to action buttons
+            document.addEventListener('click', function(e) {
+                // Edit button click
+                if (e.target.closest('.edit-btn')) {
+                    const row = e.target.closest('tr');
+                    const rowIndex = Array.from(row.parentNode.children).indexOf(row);
+                    
+                    // Skip the summary row
+                    if (rowIndex < transactions.length) {
+                        const transaction = transactions[rowIndex];
+                        
+                        // Populate the edit form
+                        document.getElementById('editDate').value = formatDateForInput(transaction.date);
+                        document.getElementById('editType').value = transaction.type;
+                        document.getElementById('editDescription').value = transaction.description.replace(' - ' + transaction.party, '');
+                        document.getElementById('editAmount').value = transaction.amount;
+                        document.getElementById('editParty').value = transaction.party;
+                        
+                        // Set the transaction ID in the form dataset
+                        document.getElementById('editForm').dataset.editId = transaction.id;
+                        
+                        // Update party label
+                        if (transaction.type === 'inflow') {
+                            editPartyLabel.textContent = 'Customer Name';
+                        } else if (transaction.type === 'outflow') {
+                            editPartyLabel.textContent = 'Vendor Name';
+                        }
+                        
+                        // Show the edit modal
+                        editEntryModal.style.display = 'flex';
+                    }
+                }
+                
+                // Delete button click
+                if (e.target.closest('.delete-btn')) {
+                    if (confirm('Are you sure you want to delete this transaction?')) {
+                        const row = e.target.closest('tr');
+                        const rowIndex = Array.from(row.parentNode.children).indexOf(row);
+                        
+                        // Skip the summary row
+                        if (rowIndex < transactions.length) {
+                            const transactionId = transactions[rowIndex].id;
+                            
+                            // Remove the transaction
+                            transactions = transactions.filter(t => t.id !== transactionId);
+                            
+                            // Recalculate balances
+                            recalculateBalances();
+                            
+                            // Update the table
+                            updateTransactionTable();
+                            
+                            // Update summary cards
+                            updateSummaryCards();
+                            
+                            alert('Transaction deleted successfully!');
+                        }
+                    }
+                }
             });
             
             // Export functionality
@@ -840,6 +1042,10 @@
                     addEntryModal.style.display = 'none';
                     entryForm.reset();
                 }
+                if (event.target === editEntryModal) {
+                    editEntryModal.style.display = 'none';
+                    editForm.reset();
+                }
             });
             
             // Helper function to format date
@@ -849,6 +1055,26 @@
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const year = date.getFullYear();
                 return `${day}-${month}-${year}`;
+            }
+            
+            // Helper function to format date for input field
+            function formatDateForInput(dateString) {
+                const parts = dateString.split('-');
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
+            }
+            
+            // Function to recalculate balances after edits or deletions
+            function recalculateBalances() {
+                let balance = 0;
+                
+                transactions.forEach(transaction => {
+                    if (transaction.type === 'inflow') {
+                        balance += transaction.amount;
+                    } else {
+                        balance -= transaction.amount;
+                    }
+                    transaction.balance = balance;
+                });
             }
             
             // Function to update transaction table
@@ -878,6 +1104,10 @@
                         ${inflowCell}
                         ${outflowCell}
                         <td class="net-balance-cell amount-col">${transaction.balance.toLocaleString('en-IN')}</td>
+                        <td class="actions-col">
+                            <button class="btn btn-warning btn-sm edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
                     `;
                     
                     // Insert before summary row
@@ -896,6 +1126,7 @@
                     <td class="cash-inflow-cell amount-col"><strong>${totalInflow.toLocaleString('en-IN')}</strong></td>
                     <td class="cash-outflow-cell amount-col"><strong>${totalOutflow.toLocaleString('en-IN')}</strong></td>
                     <td class="net-balance-cell amount-col"><strong>${closingBalance.toLocaleString('en-IN')}</strong></td>
+                    <td></td>
                 `;
             }
             
@@ -906,38 +1137,20 @@
                 const netCashFlow = totalInflow - totalOutflow;
                 const closingBalance = transactions[transactions.length - 1].balance;
                 
-                // Update card values with animation
+                // Update card values directly without animation
                 const cards = document.querySelectorAll('.summary-card');
                 
                 // Receivables card
-                animateValue(cards[0].querySelector('.card-value'), parseInt(cards[0].querySelector('.card-value').textContent.replace(/[^0-9]/g, '')), totalInflow);
+                cards[0].querySelector('.card-value').textContent = '₹' + totalInflow.toLocaleString('en-IN');
                 
                 // Liabilities card
-                animateValue(cards[1].querySelector('.card-value'), parseInt(cards[1].querySelector('.card-value').textContent.replace(/[^0-9]/g, '')), totalOutflow);
+                cards[1].querySelector('.card-value').textContent = '₹' + totalOutflow.toLocaleString('en-IN');
                 
                 // Net Cash Flow card
-                animateValue(cards[2].querySelector('.card-value'), parseInt(cards[2].querySelector('.card-value').textContent.replace(/[^0-9]/g, '')), netCashFlow);
+                cards[2].querySelector('.card-value').textContent = '₹' + netCashFlow.toLocaleString('en-IN');
                 
                 // Closing Balance card
-                animateValue(cards[3].querySelector('.card-value'), parseInt(cards[3].querySelector('.card-value').textContent.replace(/[^0-9]/g, '')), closingBalance);
-            }
-            
-            // Helper function to animate value changes
-            function animateValue(element, start, end) {
-                const duration = 1000;
-                const range = end - start;
-                const increment = end > start ? 1 : -1;
-                const stepTime = Math.abs(Math.floor(duration / range));
-                let current = start;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    element.textContent = '₹' + current.toLocaleString('en-IN');
-                    
-                    if (current === end) {
-                        clearInterval(timer);
-                    }
-                }, stepTime);
+                cards[3].querySelector('.card-value').textContent = '₹' + closingBalance.toLocaleString('en-IN');
             }
         });
     </script>
