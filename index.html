@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
+            --primary: #1a237e; /* Navy blue */
+            --secondary: #ff9800; /* Orange */
             --success: #2ecc71;
             --danger: #e74c3c;
             --warning: #f39c12;
             --light: #ecf0f1;
             --dark: #34495e;
             --gray: #95a5a6;
-            --gradient-start: #3498db;
-            --gradient-end: #2c3e50;
+            --gradient-start: #1a237e; /* Navy blue */
+            --gradient-end: #283593; /* Darker navy blue */
             --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
             --hover-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
@@ -96,15 +96,15 @@
         
         .summary-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 50px; /* Changed to rounded shape */
             padding: 25px;
             box-shadow: var(--card-shadow);
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
-            border-top: 5px solid var(--primary);
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
         
         .summary-card::before {
@@ -119,8 +119,8 @@
         
         .summary-card:nth-child(1)::before { background: var(--success); }
         .summary-card:nth-child(2)::before { background: var(--danger); }
-        .summary-card:nth-child(3)::before { background: var(--secondary); }
-        .summary-card:nth-child(4)::before { background: var(--secondary); } /* Changed to match closing balance */
+        .summary-card:nth-child(3)::before { background: var(--secondary); } /* Orange */
+        .summary-card:nth-child(4)::before { background: var(--primary); } /* Navy blue */
         
         .summary-card:hover {
             transform: translateY(-8px);
@@ -157,7 +157,7 @@
         }
         
         .neutral {
-            color: var(--secondary); /* Changed to match closing balance */
+            color: var(--primary); /* Changed to navy blue */
         }
         
         .card-description {
@@ -186,7 +186,7 @@
             color: var(--primary);
             font-weight: 700;
             padding-bottom: 10px;
-            border-bottom: 3px solid var(--secondary);
+            border-bottom: 3px solid var(--secondary); /* Orange */
             display: inline-block;
         }
         
@@ -197,7 +197,7 @@
         
         .btn {
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 25px; /* Rounded buttons */
             border: none;
             font-weight: 700;
             cursor: pointer;
@@ -209,7 +209,7 @@
         }
         
         .btn-primary {
-            background: var(--primary);
+            background: var(--primary); /* Navy blue */
             color: white;
         }
         
@@ -220,8 +220,8 @@
         
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
+            border: 2px solid var(--primary); /* Navy blue */
+            color: var(--primary); /* Navy blue */
             font-weight: 700;
         }
         
@@ -238,6 +238,7 @@
         .btn-sm {
             padding: 5px 10px;
             font-size: 13px;
+            border-radius: 15px; /* Smaller rounded buttons */
         }
         
         .btn:hover {
@@ -304,7 +305,7 @@
         }
         
         .net-balance-cell {
-            color: var(--secondary);
+            color: var(--primary); /* Navy blue */
             font-weight: 700;
         }
         
@@ -379,7 +380,7 @@
             gap: 8px;
             cursor: pointer;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 25px; /* Rounded filter options */
             border: 2px solid var(--primary);
             transition: all 0.3s ease;
             font-weight: 700;
