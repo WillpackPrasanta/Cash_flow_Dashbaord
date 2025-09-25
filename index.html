@@ -335,6 +335,8 @@
         .header-group th {
             color: white;
             border-bottom: none;
+            font-weight: bold;
+            font-size: 16px;
         }
         
         @media (max-width: 1024px) {
@@ -383,24 +385,6 @@
         .card-value {
             animation: countUp 1s ease-out;
         }
-        
-        /* Chart placeholder */
-        .chart-container {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 30px;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border: 2px dashed #dee2e6;
-            color: var(--gray);
-            font-size: 18px;
-            font-weight: 600;
-        }
     </style>
 </head>
 <body>
@@ -425,9 +409,6 @@
                 <div class="card-title">Total Receivables</div>
                 <div class="card-value positive">₹4,30,000</div>
                 <div class="card-description">Total amount collected from customers</div>
-                <div class="card-trend trend-up">
-                    <i class="fas fa-arrow-up"></i> 12% increase from last month
-                </div>
             </div>
             <div class="summary-card">
                 <div class="card-icon">
@@ -436,45 +417,31 @@
                 <div class="card-title">Total Liabilities</div>
                 <div class="card-value negative">₹3,00,000</div>
                 <div class="card-description">Total amount paid to vendors</div>
-                <div class="card-trend trend-down">
-                    <i class="fas fa-arrow-down"></i> 5% decrease from last month
-                </div>
             </div>
             <div class="summary-card">
                 <div class="card-icon">
-                    <i class="fas fa-balance-scale"></i>
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
                 <div class="card-title">Net Cash Flow</div>
                 <div class="card-value positive">₹1,30,000</div>
                 <div class="card-description">Positive cash flow for the period</div>
-                <div class="card-trend trend-up">
-                    <i class="fas fa-arrow-up"></i> 25% improvement from last month
-                </div>
             </div>
             <div class="summary-card">
                 <div class="card-icon">
-                    <i class="fas fa-piggy-bank"></i>
+                    <i class="fas fa-wallet"></i>
                 </div>
                 <div class="card-title">Closing Balance</div>
                 <div class="card-value neutral">₹6,30,000</div>
                 <div class="card-description">Cash balance at period end</div>
-                <div class="card-trend trend-up">
-                    <i class="fas fa-arrow-up"></i> 8% growth from last month
-                </div>
             </div>
-        </div>
-        
-        <div class="chart-container">
-            <i class="fas fa-chart-bar" style="font-size: 40px; margin-right: 15px;"></i>
-            Cash Flow Visualization Chart (Interactive chart would appear here)
         </div>
         
         <div class="transaction-section">
             <div class="section-header">
                 <div class="section-title">Transaction Details</div>
                 <div class="section-actions">
-                    <button class="btn btn-outline"><i class="fas fa-download"></i> Export</button>
-                    <button class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
+                    <button class="btn btn-outline" id="exportBtn"><i class="fas fa-download"></i> Export</button>
+                    <button class="btn btn-primary" id="filterBtn"><i class="fas fa-filter"></i> Filter</button>
                 </div>
             </div>
             <table>
@@ -583,6 +550,15 @@
                         }
                     }, 30);
                 }, 500);
+            });
+            
+            // Button actions
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                alert('Export functionality would be implemented here. Data would be downloaded as CSV or Excel file.');
+            });
+            
+            document.getElementById('filterBtn').addEventListener('click', function() {
+                alert('Filter functionality would be implemented here. You could filter by date range, amount, or transaction type.');
             });
         });
     </script>
