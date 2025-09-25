@@ -22,20 +22,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        html, body {
-            height: 100%;
+        body {
             background-color: #f5f7fa;
             color: #333;
+            padding: 20px;
             line-height: 1.6;
-            overflow: hidden; /* Prevent scrolling on body */
         }
         
         .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            height: 100vh; /* Full viewport height */
-            padding: 20px;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -46,7 +41,6 @@
             border-radius: 10px 10px 0 0;
             margin-bottom: 25px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            flex-shrink: 0; /* Prevent header from shrinking */
         }
         
         h1 {
@@ -64,7 +58,6 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
-            flex-shrink: 0; /* Prevent cards from shrinking */
         }
         
         .summary-card {
@@ -120,10 +113,6 @@
             padding: 25px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            flex-grow: 1; /* Allow this section to grow and fill remaining space */
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; /* Prevent content overflow */
         }
         
         .section-title {
@@ -133,19 +122,12 @@
             font-weight: 600;
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
-            flex-shrink: 0; /* Prevent title from shrinking */
-        }
-        
-        .table-container {
-            flex-grow: 1; /* Allow table container to grow */
-            overflow: auto; /* Enable scrolling for table if needed */
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
-            min-width: 800px; /* Ensure table has minimum width */
         }
         
         th, td {
@@ -196,19 +178,14 @@
         
         .footer {
             text-align: center;
-            margin-top: auto; /* Push footer to bottom */
+            margin-top: 30px;
             color: var(--gray);
             font-size: 14px;
             padding: 15px;
             border-top: 1px solid #e0e0e0;
-            flex-shrink: 0; /* Prevent footer from shrinking */
         }
         
         @media (max-width: 768px) {
-            .dashboard-container {
-                padding: 10px;
-            }
-            
             .summary-cards {
                 grid-template-columns: 1fr;
             }
@@ -220,18 +197,6 @@
             
             .card-value {
                 font-size: 28px;
-            }
-            
-            header {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
             }
         }
     </style>
@@ -268,77 +233,75 @@
         
         <div class="transaction-section">
             <div class="section-title">Transaction Details</div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="date-col">Date</th>
-                            <th>Description</th>
-                            <th class="amount-col">Cash Inflow</th>
-                            <th class="name-col">Customer Name</th>
-                            <th class="amount-col">Cash Outflow</th>
-                            <th class="name-col">Vendor Name</th>
-                            <th class="amount-col">Net Balance (₹)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01-09-2025</td>
-                            <td>Opening Balance</td>
-                            <td class="inflow amount-col">5,00,000</td>
-                            <td></td>
-                            <td class="amount-col"></td>
-                            <td></td>
-                            <td class="amount-col">5,00,000</td>
-                        </tr>
-                        <tr>
-                            <td>02-09-2025</td>
-                            <td>Customer Collection</td>
-                            <td class="inflow amount-col">2,50,000</td>
-                            <td>JS Mining</td>
-                            <td class="amount-col"></td>
-                            <td></td>
-                            <td class="amount-col">7,50,000</td>
-                        </tr>
-                        <tr>
-                            <td>03-09-2025</td>
-                            <td>Vendor Payment</td>
-                            <td class="amount-col"></td>
-                            <td></td>
-                            <td class="outflow amount-col">1,00,000</td>
-                            <td>Dwarka Enterprises</td>
-                            <td class="amount-col">6,50,000</td>
-                        </tr>
-                        <tr>
-                            <td>05-09-2025</td>
-                            <td>Customer Collection</td>
-                            <td class="inflow amount-col">1,80,000</td>
-                            <td>KEC International</td>
-                            <td class="amount-col"></td>
-                            <td></td>
-                            <td class="amount-col">8,30,000</td>
-                        </tr>
-                        <tr>
-                            <td>07-09-2025</td>
-                            <td>Vendor Payment</td>
-                            <td class="amount-col"></td>
-                            <td></td>
-                            <td class="outflow amount-col">2,00,000</td>
-                            <td>Transport</td>
-                            <td class="amount-col">6,30,000</td>
-                        </tr>
-                        <tr class="summary-row">
-                            <td><strong>Total</strong></td>
-                            <td></td>
-                            <td class="inflow amount-col"><strong>4,30,000</strong></td>
-                            <td></td>
-                            <td class="outflow amount-col"><strong>3,00,000</strong></td>
-                            <td></td>
-                            <td class="amount-col"><strong>6,30,000</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="date-col">Date</th>
+                        <th>Description</th>
+                        <th class="amount-col"> Receivables Customer Collection</th>
+                        <th class="name-col">Customer Name</th>
+                        <th class="amount-col">Liabilities Vendor Payment</th>
+                        <th class="name-col">Vendor Name</th>
+                        <th class="amount-col">Net Balance (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01-09-2025</td>
+                        <td>Opening Balance</td>
+                        <td class="inflow amount-col">5,00,000</td>
+                        <td></td>
+                        <td class="amount-col"></td>
+                        <td></td>
+                        <td class="amount-col">5,00,000</td>
+                    </tr>
+                    <tr>
+                        <td>02-09-2025</td>
+                        <td>Customer Collection</td>
+                        <td class="inflow amount-col">2,50,000</td>
+                        <td>JS Mining</td>
+                        <td class="amount-col"></td>
+                        <td></td>
+                        <td class="amount-col">7,50,000</td>
+                    </tr>
+                    <tr>
+                        <td>03-09-2025</td>
+                        <td>Vendor Payment</td>
+                        <td class="amount-col"></td>
+                        <td></td>
+                        <td class="outflow amount-col">1,00,000</td>
+                        <td>Dwarka Enterprises</td>
+                        <td class="amount-col">6,50,000</td>
+                    </tr>
+                    <tr>
+                        <td>05-09-2025</td>
+                        <td>Customer Collection</td>
+                        <td class="inflow amount-col">1,80,000</td>
+                        <td>KEC International</td>
+                        <td class="amount-col"></td>
+                        <td></td>
+                        <td class="amount-col">8,30,000</td>
+                    </tr>
+                    <tr>
+                        <td>07-09-2025</td>
+                        <td>Vendor Payment</td>
+                        <td class="amount-col"></td>
+                        <td></td>
+                        <td class="outflow amount-col">2,00,000</td>
+                        <td>Transport</td>
+                        <td class="amount-col">6,30,000</td>
+                    </tr>
+                    <tr class="summary-row">
+                        <td><strong>Total</strong></td>
+                        <td></td>
+                        <td class="inflow amount-col"><strong>4,30,000</strong></td>
+                        <td></td>
+                        <td class="outflow amount-col"><strong>3,00,000</strong></td>
+                        <td></td>
+                        <td class="amount-col"><strong>6,30,000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         
         <div class="footer">
